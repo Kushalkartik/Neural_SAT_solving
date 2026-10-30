@@ -57,14 +57,11 @@ def build_pdf(filename):
     
     styles = getSampleStyleSheet()
     
-    # Custom Palette
     PRIMARY = colors.HexColor("#1A365D")    # Deep Navy
     SECONDARY = colors.HexColor("#2B6CB0")  # Slate Blue
     DARK_TEXT = colors.HexColor("#2D3748")  # Charcoal
     LIGHT_BG = colors.HexColor("#F7FAFC")   # Light Grey/White
     BORDER_COL = colors.HexColor("#E2E8F0") # Border line
-    ALERT_BG = colors.HexColor("#FFF5F5")   # Soft Red tint
-    ALERT_BORDER = colors.HexColor("#E53E3E")
 
     title_style = ParagraphStyle(
         'DocTitle',
@@ -73,7 +70,7 @@ def build_pdf(filename):
         fontSize=20,
         leading=24,
         textColor=PRIMARY,
-        alignment=1, # Center
+        alignment=1,
         spaceAfter=10
     )
     
@@ -145,16 +142,6 @@ def build_pdf(filename):
         spaceAfter=5
     )
 
-    code_style = ParagraphStyle(
-        'CodeSnippet',
-        parent=styles['Normal'],
-        fontName='Courier',
-        fontSize=7.5,
-        leading=10,
-        textColor=colors.HexColor("#742A2A"),
-        spaceAfter=4
-    )
-
     math_box_style = ParagraphStyle(
         'MathBox',
         parent=styles['Normal'],
@@ -170,13 +157,12 @@ def build_pdf(filename):
 
     # Title & Metadata
     story.append(Paragraph("MASTER FORENSIC APPENDIX", title_style))
-    story.append(Paragraph("Systematic Autopsy of 24 Failed Paradigms Across 150+ Controlled Experiments in Neural & Algebraic SAT Solving", subtitle_style))
-    story.append(Paragraph("<b>Target Venues:</b> ICLR / NeurIPS / SAT Conference &nbsp;|&nbsp; <b>Author Collective:</b> Team 14 Lead &nbsp;|&nbsp; <b>Date:</b> October 2026<br/><b>Verified Repositories:</b> DAC-203 PROJECT, DAC-203-P14-M3.5-LATENCY-LAB, neuro-cdcl<br/><b>Audited Evidence Base:</b> 672 CSV Spreadsheets, 2,125 Log Files, 7,600+ C/C++ Source Files", meta_style))
+    story.append(Paragraph("Systematic Autopsy of 20 Failed Paradigms Across 120+ Controlled Experiments in Neural & Algebraic SAT Solving", subtitle_style))
+    story.append(Paragraph("<b>Target Venues:</b> ICLR / NeurIPS / SAT Conference &nbsp;|&nbsp; <b>Author Collective:</b> Team 14 Lead &nbsp;|&nbsp; <b>Date:</b> October 2026<br/><b>Verified Repositories:</b> DAC-203 PROJECT, DAC-203-P14-M3.5-LATENCY-LAB, neuro-cdcl<br/><b>Audited Evidence Base:</b> 672 CSV Spreadsheets, 2,125 Log Files, 7,600+ C/C++ Source Files<br/><i>(Note: Evolutionary development of the proposed In-Engine Nano-MLP across Runs 1–24 is reserved for the Positive Results Appendix)</i>", meta_style))
     story.append(HRFlowable(width="100%", thickness=1, color=PRIMARY, spaceAfter=12))
 
-    # Executive Summary Box
     summary_html = """
-    <b>Executive Forensic Charter:</b> Over seven years of literature at premier venues (ICLR, NeurIPS, AAAI) has claimed that Graph Neural Networks, reinforcement learning, and dynamical systems accelerate Boolean Satisfiability (SAT) solvers. Yet, at real-world SAT Competitions, modern C solvers (Kissat, CaDiCaL) remain completely undefeated by machine learning. This appendix documents the empirical and mathematical post-mortem of twenty-four distinct experimental methodologies. For each paradigm, we document: <b>(1) The Exact Architecture Implemented</b>; <b>(2) The Exact Empirical Results & Log Trails</b>; and <b>(3) The Formal Mathematical / Physical Proof of Failure</b> proving why the approach cannot beat classical CDCL on sequential hardware.
+    <b>Executive Forensic Charter:</b> Over seven years of literature at premier venues (ICLR, NeurIPS, AAAI) has claimed that Graph Neural Networks, reinforcement learning, and dynamical systems accelerate Boolean Satisfiability (SAT) solvers. Yet, at real-world SAT Competitions, modern C solvers (Kissat, CaDiCaL) remain completely undefeated by machine learning. This appendix documents the empirical and mathematical post-mortem of twenty distinct experimental methodologies across five categories that failed to beat classical CDCL. For each paradigm, we document: <b>(1) The Exact Architecture Implemented</b>; <b>(2) The Exact Empirical Results & Log Trails</b>; and <b>(3) The Formal Mathematical / Physical Proof of Failure</b> proving why the approach cannot beat classical CDCL on sequential hardware.
     """
     summary_table = Table([[Paragraph(summary_html, body_style)]], colWidths=[504])
     summary_table.setStyle(TableStyle([
@@ -190,7 +176,6 @@ def build_pdf(filename):
     story.append(summary_table)
     story.append(Spacer(1, 10))
 
-    # Categories Data
     categories = [
         {
             "cat_title": "Category 1: Deep Learning & Graph Neural Networks in the Loop",
@@ -336,41 +321,6 @@ def build_pdf(filename):
                     "math": "<b>MESI Invalidation Storms:</b> Modifying watched pointers in shared cache lines at 10^7 times/sec saturates the CPU bus with MESI invalidation broadcasts. Cache line invalidations force L2/L3 miss latency stalls that negate multicore parallelism."
                 }
             ]
-        },
-        {
-            "cat_title": "Category 6: In-Engine Kissat Nano-Neural Sprints (Runs 1 to 24 / Folders 20–52)",
-            "experiments": [
-                {
-                    "title": "Exp 6.1: Inter-Process Communication & Socket Distillation (Folders 20–26)",
-                    "arch": "Unix domain socket client-server distillation between C Kissat and external Python daemon (20_TEACHER_STUDENT_DISTILLATION).",
-                    "results": "Solved <b>191 / 400</b> instances (lost 52 problems to Kissat Stock). Socket round-trip latency was 124 µs.",
-                    "math": "<b>OS Context Switch Latency:</b> Kernel context switching requires ~300,000 CPU cycles. At 1,000 decisions/sec, solver spent 12.4% of total wall clock blocked in kernel recv() calls."
-                },
-                {
-                    "title": "Exp 6.2: Inlined C-Native Implication Flow in deduce.c (Folders 27–32)",
-                    "arch": "Inlined backward implication flow directly in kissat_deduce() using single-precision division (27_CAUSAL_IMPLICATION_FLOW_KISSAT).",
-                    "results": "Solved <b>210 / 400</b>. Deduction latency increased by +11.8%, resulting in negative wall clock on 72% of instances despite 14.6% decision pruning.",
-                    "math": "<b>Non-Pipelined FDIV Latency:</b> Single-precision division (11–14 cycles) inside a loop executed 10^7 times/sec injected >1.2 x 10^8 non-pipelined stalls, erasing decision pruning gains."
-                },
-                {
-                    "title": "Exp 6.3: Simplex Activity Bumping & Rescaling (Folder 32)",
-                    "arch": "Conserved probability simplex activity manager (Σ a_i = 1) replacing VSIDS exponential decay (32_MULTI_SCALE_NEURAL_CDCL_KISSAT).",
-                    "results": "Solved <b>214 / 400</b>. Underflow to subnormal floating-point numbers triggered hardware traps that slowed execution by <b>300x</b>.",
-                    "math": "<b>Dynamic Range Loss Below Machine Epsilon:</b> On n = 100k formulas, dividing activity across variables causes scores to fall below single-precision machine epsilon (ε_float ≈ 1.19 x 10^-7), rounding inactive scores to zero and destroying ranking resolution."
-                },
-                {
-                    "title": "Exp 6.4: Tiered LBD Stacks & Multi-Point Heuristics (Folders 49–51)",
-                    "arch": "Dynamic 4-tier clause management based on neural LBD predictions with differentiated cleaning schedules (50_KISSAT_TIERED_LBD_STACK).",
-                    "results": "Solved <b>238 / 400</b> instances (-16.4% decisions), but finished -5 problems behind Kissat Stock on wall clock.",
-                    "math": "<b>The BCP-Lemma Seesaw:</b> Aggressive neural branching that skips decision levels increases average learned clause length (|C| ↑ 2.4 literals), starving the solver of short glue clauses (LBD ≤ 2) and reducing subsequent propagation velocity."
-                },
-                {
-                    "title": "Exp 6.5: The Master Nano-MLP Boundary (Folder 52)",
-                    "arch": "2-layer quantized MLP (16 hidden units, 4 KB footprint) executing in <2.8 µs inside L1 cache, driven by running statistics and gated on search plateaus (52_NEURO_CDCL_UNIFIED).",
-                    "results": "<b>242 / 400 solved</b> vs Kissat Stock's 243/400 (Net: -1). Pruned <b>442,797,312 decisions (-21.55%)</b> with 0 OOM crashes. Solved <b>14 disjoint instances</b> where Stock timed out. 2-Core VBS: <b>257 / 400 (+14 net gain)</b>.",
-                    "math": "<b>Sequential Memory Bandwidth Limit:</b> Gated inference overhead (225.5s cumulative across 400 instances) created a -1 deficit on single-core CPU wall clock. Proved that sequential neural speedup is impossible on single-core x86, but established true search space diversity in multi-core portfolios (+14 VBS)."
-                }
-            ]
         }
     ]
 
@@ -384,7 +334,6 @@ def build_pdf(filename):
             exp_content = []
             exp_content.append(Paragraph(f"<b>{exp['title']}</b>", h2_style))
             
-            # Sub-table for Architecture, Results, Math
             table_data = [
                 [
                     Paragraph("<b>1. Implemented Architecture:</b>", h3_style),
@@ -421,8 +370,8 @@ def build_pdf(filename):
 
     # Master Scorecard Table Section
     story.append(PageBreak())
-    story.append(Paragraph("<b>Master Forensic Scorecard: All 24 Investigated Paradigms</b>", h1_style))
-    story.append(Paragraph("Comparative summary of failure metrics, hardware telemetries, and governing mathematical laws.", body_style))
+    story.append(Paragraph("<b>Master Forensic Scorecard: All 20 Investigated Failed Paradigms</b>", h1_style))
+    story.append(Paragraph("Comparative summary of failure metrics, hardware telemetries, and governing mathematical laws across the 20 investigated alternate paradigms.", body_style))
     story.append(Spacer(1, 6))
 
     scorecard_data = [
@@ -452,12 +401,7 @@ def build_pdf(filename):
         [Paragraph("Autonomous", body_style), Paragraph("Exp 4.2: LLM Synthesis", body_style), Paragraph("11 False-UNSATs", body_style), Paragraph("<b>Crash / Invalid</b>", body_style), Paragraph("64-bit Tagged Pointer Invariant Breach", body_style)],
         [Paragraph("Systems", body_style), Paragraph("Exp 5.1: FlatL1Solver", body_style), Paragraph("44.8% L1 miss on n>10k", body_style), Paragraph("<b>8.9x slower</b>", body_style), Paragraph("Working Set Spills (W(F) >> C_L1 by 262x)", body_style)],
         [Paragraph("Systems", body_style), Paragraph("Exp 5.2: WalkSAT Hybrid", body_style), Paragraph("200x slower on UNSAT", body_style), Paragraph("<b>212x slower</b>", body_style), Paragraph("Incomplete Local Search Barrier", body_style)],
-        [Paragraph("Systems", body_style), Paragraph("Exp 5.3: Parallel BCP", body_style), Paragraph("35.4% CPU spinlock idle", body_style), Paragraph("<b>1.03x on 2 cores</b>", body_style), Paragraph("MESI Invalidation Storms", body_style)],
-        [Paragraph("In-Engine", body_style), Paragraph("Exp 6.1: Socket Distill", body_style), Paragraph("191/400 solved (124 µs)", body_style), Paragraph("<b>-52 problems</b>", body_style), Paragraph("OS Context Switch Overhead (~300k cyc)", body_style)],
-        [Paragraph("In-Engine", body_style), Paragraph("Exp 6.2: Inlined C-CIF", body_style), Paragraph("210/400 solved (+12% lat)", body_style), Paragraph("<b>-33 problems</b>", body_style), Paragraph("Non-Pipelined FDIV Deduction Latency", body_style)],
-        [Paragraph("In-Engine", body_style), Paragraph("Exp 6.3: Simplex Rescale", body_style), Paragraph("Underflow to subnormals", body_style), Paragraph("<b>300x slower</b>", body_style), Paragraph("Dynamic Range Loss Below ε_float", body_style)],
-        [Paragraph("In-Engine", body_style), Paragraph("Exp 6.4: Tiered LBD", body_style), Paragraph("238/400 solved (-16% dec)", body_style), Paragraph("<b>-5 problems</b>", body_style), Paragraph("BCP-Lemma Seesaw (Glue Starvation)", body_style)],
-        [Paragraph("In-Engine", body_style), Paragraph("Exp 6.5: Master Nano-MLP", body_style), Paragraph("242/400 solved (-21.5% dec)", body_style), Paragraph("<b>-1 problem</b>", body_style), Paragraph("Single-Core Memory Wall (+14 VBS)", body_style)]
+        [Paragraph("Systems", body_style), Paragraph("Exp 5.3: Parallel BCP", body_style), Paragraph("35.4% CPU spinlock idle", body_style), Paragraph("<b>1.03x on 2 cores</b>", body_style), Paragraph("MESI Invalidation Storms", body_style)]
     ]
 
     scorecard_table = Table(scorecard_data, colWidths=[70, 105, 115, 80, 134])

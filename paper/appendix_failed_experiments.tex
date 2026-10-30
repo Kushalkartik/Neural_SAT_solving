@@ -31,7 +31,7 @@
 \maketitle
 
 \begin{abstract}
-This supplementary document provides the exhaustive, multi-paradigm forensic autopsy of twenty-four major experimental methodologies investigated across seven years of research in machine learning and algebraic acceleration for Conflict-Driven Clause Learning (CDCL) SAT solvers. For every investigated paradigm, we present: (1) the explicit algorithm and system architecture implemented; (2) the empirical telemetry, wall-clock runtimes, decision step counts, and crash profiles across standard SAT Competition benchmarks; and (3) the formal mathematical theorem, complexity lower bound, or micro-architectural hardware limit proving why the technique fundamentally fails to accelerate sequential CDCL solvers. All underlying source codes, binary harnesses, and 672 raw evaluation CSV spreadsheets are open-sourced in the accompanying repository.
+This supplementary document provides the exhaustive, multi-paradigm forensic autopsy of twenty major failed experimental methodologies investigated across seven years of research in machine learning and algebraic acceleration for Conflict-Driven Clause Learning (CDCL) SAT solvers. For every investigated paradigm, we present: (1) the explicit algorithm and system architecture implemented; (2) the empirical telemetry, wall-clock runtimes, decision step counts, and crash profiles across standard SAT Competition benchmarks; and (3) the formal mathematical theorem, complexity lower bound, or micro-architectural hardware limit proving why the technique fundamentally fails to accelerate sequential CDCL solvers. All underlying source codes, binary harnesses, and 672 raw evaluation CSV spreadsheets are open-sourced in the accompanying repository. \textit{(Note: The evolutionary engineering and positive evaluation of our proposed In-Engine Nano-MLP across Runs 1 to 24 and Folder 52 is reserved for the Main Paper and Positive Results Appendix).}
 \end{abstract}
 
 \tableofcontents
@@ -41,14 +41,13 @@ This supplementary document provides the exhaustive, multi-paradigm forensic aut
 
 Over the past seven years, an extensive literature at premier machine learning venues (ICLR, NeurIPS, ICML, AAAI) has proposed utilizing Graph Neural Networks (GNNs), reinforcement learning (RL), and physics-inspired dynamical systems to guide Boolean Satisfiability (SAT) solvers. However, at the annual International SAT Competition, solvers implemented in bare-metal C (e.g., Kissat, CaDiCaL) remain completely undefeated by learning-based architectures.
 
-To rigorously understand this divide, we conducted an exhaustive investigation comprising 24 major experimental milestones across more than 150 controlled evaluations. We categorize these failed paradigms into six structural classes:
+To rigorously understand this divide, we conducted an exhaustive investigation comprising 20 major failed experimental paradigms across more than 120 controlled evaluations. We categorize these failed paradigms into five structural classes:
 \begin{enumerate}
     \item \textbf{Category 1: Deep Learning \& Graph Neural Networks in the Loop} (Graph-Q-SAT, One-shot embeddings, ImitSAT, RLAF attention, and NeuroBack backbone seeding).
     \item \textbf{Category 2: Physics-Inspired Dynamical Systems \& Spin-Glass Transitions} (Kuramoto synchronization, Wilsonian renormalization, continuous Hopfield networks, Survey Propagation, and Shannon entropy).
     \item \textbf{Category 3: Advanced Algebraic \& Higher Proof Complexity Refutations} (Bounded Structural Polynomial Calculus, Deep PCR, Gröbner bases, Extended Resolution, and Neuro-FRAIG).
     \item \textbf{Category 4: Autonomous Reinforcement Learning \& LLM Runtime Synthesis} (M4 Marathon DPO/DAGGER and runtime LLM heuristic synthesis).
     \item \textbf{Category 5: Low-Latency Systems \& Micro-Architectural Bottlenecks} (FlatL1 cache solvers, WalkSAT stochastic local search hybrids, and multi-threaded concurrent BCP).
-    \item \textbf{Category 6: In-Engine Kissat Nano-Neural Sprints} (IPC socket distillation, inlined deduction flow, simplex rescaling, tiered LBD stacks, and the master Nano-MLP boundary).
 \end{enumerate}
 
 \newpage
@@ -383,46 +382,6 @@ Multi-threaded CDCL with shared watched lists protected by spinlocks (\texttt{42
 Modifying watched literal pointers in shared cache lines at $10^7$ times/sec saturates the interconnect bus with MESI invalidation broadcasts, causing L2/L3 miss latency stalls that negate parallelism.
 
 \newpage
-\section{Category 6: In-Engine Kissat Nano-Neural Sprints (Runs 1 to 24)}
-
-\subsection{Exp 6.1: Inter-Process Communication \& Socket Distillation (Folders 20–26)}
-\paragraph{1. Architecture & Empirical Telemetry.}
-Client-server distillation via Unix domain sockets (\texttt{20_TEACHER_STUDENT_DISTILLATION}). Solved **191 / 400** instances (lost 52 problems to Kissat Stock). Socket round-trip latency was $124\,\mu\text{s}$.
-\paragraph{2. Mathematical Failure Law: Context Switch Latency.}
-OS kernel context switching requires $\approx 300,000$ CPU cycles, causing the solver to spend $12.4\%$ of total wall-clock time blocked in kernel \texttt{recv()} calls.
-
-\subsection{Exp 6.2: Inlined C-Native Implication Flow in \texttt{deduce.c} (Folders 27–32)}
-\paragraph{1. Architecture & Empirical Telemetry.}
-Inlined backward implication flow in `kissat_deduce()` (\texttt{27_CAUSAL_IMPLICATION_FLOW_KISSAT}). Solved **210 / 400**; deduction loop latency increased by $+11.8\%$, yielding negative wall-clock on $72\%$ of instances.
-\paragraph{2. Mathematical Failure Law: Non-Pipelined Floating-Point Latency.}
-Adding single-precision division \texttt{FDIV} (latency 11–14 cycles) inside an inner deduction loop executed $10^7$ times/sec injected $>1.2 \times 10^8$ non-pipelined stalls, negating a $14.6\%$ decision tree reduction.
-
-\subsection{Exp 6.3: Simplex Activity Bumping & Activity Rescaling (Folder 32)}
-\paragraph{1. Architecture & Empirical Telemetry.}
-Conserved probability simplex activity manager ($\sum a_i = 1$). Solved **214 / 400** instances; numerical underflow to subnormals slowed execution by **$300\times$**.
-\paragraph{2. Mathematical Failure Law: Loss of Dynamic Range Below Machine Epsilon.}
-On formulas with $n = 100,000$, dividing activity across variables causes scores to fall below single-precision machine epsilon ($\epsilon_{\text{float}} \approx 1.19 \times 10^{-7}$), rounding inactive variable scores to zero and destroying ranking resolution.
-
-\subsection{Exp 6.4: Tiered LBD Stacks & Multi-Point Heuristics (Folders 49–51)}
-\paragraph{1. Architecture & Empirical Telemetry.}
-Four dynamic clause tiers with neural LBD prediction. Solved **238 / 400** instances ($-16.4\%$ decisions), but finished $-5$ problems behind Stock Kissat.
-\paragraph{2. Mathematical Failure Law: The BCP-Lemma Seesaw.}
-Aggressive neural branching that skips decision levels increases learned clause length ($\overline{|C_{\text{learned}}|} \uparrow 2.4$), starving the solver of short glue clauses ($LBD \le 2$) and reducing subsequent propagation velocity.
-
-\subsection{Exp 6.5: The Master Nano-MLP Boundary (Folder 52)}
-\paragraph{1. Architecture Implemented.}
-2-layer quantized MLP (16 hidden units, 4 KB footprint) in L1 cache executing forward inference in $<2.8\,\mu\text{s}$, driven by zero-allocation running telemetry and gated on search plateaus.
-\paragraph{2. Exact Empirical Results.}
-\begin{itemize}
-    \item \textbf{Single-Core Solved Count:} Kissat Stock \textbf{243 / 400} vs. Folder 52 \textbf{242 / 400} (Net: \textbf{$-1$}).
-    \item \textbf{Search Tree Pruning:} Pruned **442,797,312 decisions ($-21.55\%$ net reduction)** with 0 OOM crashes.
-    \item \textbf{Search Orthogonality:} Solved \textbf{14 hard industrial instances} where Kissat Stock timed out at 5,000s.
-    \item \textbf{Virtual Best Solver (2-Core VBS):} Reached \textbf{257 / 400 (+14 net gain over Stock Kissat)}.
-\end{itemize}
-\paragraph{3. The Physical Frontier: Sequential CPU Memory Limit.}
-Folder 52 proved that sequential single-core CPU architecture cannot overcome the Amdahl-BCP memory barrier. However, the neural heuristic discovers fundamentally orthogonal search trajectories, demonstrating that the valid deployment of machine learning in automated reasoning is \textbf{orthogonal multi-core portfolio collaboration (+14 VBS)}.
-
-\newpage
 \section{Master Failure Scorecard}
 
 \begin{table}[h!]
@@ -456,15 +415,9 @@ Autonomous & LLM Synthesis & 11 False-UNSATs & Crash / Invalid & 64-bit Tagged P
 Systems & FlatL1Solver & 44.8\% L1 miss on $n>10\text{k}$ & $8.9\times$ slower & Working Set Spills ($W(F) \gg C_{\text{L1}}$ by $262\times$) \\
 Systems & WalkSAT Hybrid & 200x slower on UNSAT & $212\times$ slower & Incomplete Local Search Barrier \\
 Systems & Parallel BCP & 35.4\% CPU spinlock idle & $1.03\times$ on 2 cores & MESI Invalidation Storms \\
-\midrule
-In-Engine & Socket Distill & 191/400 solved (124 $\mu$s) & $-52$ problems & OS Context Switch Overhead ($\sim 300\text{k}$ cyc) \\
-In-Engine & Inlined C-CIF & 210/400 solved (+12\% lat) & $-33$ problems & Non-Pipelined \texttt{FDIV} Deduction Latency \\
-In-Engine & Simplex Rescaling & Underflow to subnormals & $300\times$ slower & Dynamic Range Loss Below $\epsilon_{\text{float}}$ \\
-In-Engine & Tiered LBD & 238/400 solved ($-16\%$ dec) & $-5$ problems & BCP-Lemma Seesaw (Glue Starvation) \\
-In-Engine & Master Nano-MLP & \textbf{242/400 solved (-21.5\% dec)} & \textbf{$-1$ problem} & Single-Core Memory Limit (\textbf{+14 VBS}) \\
 \bottomrule
 \end{tabular}
-\caption{Comprehensive scorecard of the 24 investigated experimental failure configurations.}
+\caption{Comprehensive scorecard of the 20 investigated experimental failure configurations.}
 \label{tab:master_scorecard}
 \end{table}
 

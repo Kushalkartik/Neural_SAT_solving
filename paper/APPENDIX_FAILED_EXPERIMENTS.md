@@ -3,7 +3,8 @@
 > **Venue Target:** ICLR / NeurIPS / SAT Conference (Supplementary Material / Master Forensic Appendix)  
 > **Repository:** `https://github.com/Kushalkartik/Neural_SAT_solving.git` (`neuro-cdcl`)  
 > **Audited Workspaces:** `DAC-203 PROJECT` and `DAC-203-P14-M3.5-LATENCY-LAB`  
-> **Telemetry & Evidence Base:** 672 CSV result spreadsheets, 2,125 log/JSON files, and 24 major experimental milestones across 150+ controlled runs.
+> **Scope:** The 20 Major Failed Alternate Paradigms Across Deep Learning, Physics, Algebra, Autonomous AI, and Low-Latency Systems.  
+> *(Note: The evolutionary ablation of our proposed In-Engine Nano-MLP across Runs 1 to 24 and Folder 52 is reserved for the Main Paper & Positive Evaluation Appendix).*
 
 ---
 
@@ -34,24 +35,18 @@
    - [Exp 5.1: FlatL1Solver: 32 KB Cache Arrays & Working Set Spills](#exp-51-flatl1solver-32-kb-cache-arrays--working-set-spills)
    - [Exp 5.2: WalkSAT Stochastic Local Search Restarts](#exp-52-walksat-stochastic-local-search-restarts)
    - [Exp 5.3: Parallel Concurrent Multi-Threaded BCP Lock Contention](#exp-53-parallel-concurrent-multi-threaded-bcp-lock-contention)
-7. [Category 6: In-Engine Kissat Nano-Neural Sprints (Runs 1 to 24 / Folders 20–52)](#7-category-6-in-engine-kissat-nano-neural-sprints-runs-1-to-24--folders-2052)
-   - [Exp 6.1: Inter-Process Communication & Socket Distillation (Folders 20–26)](#exp-61-inter-process-communication--socket-distillation-folders-2026)
-   - [Exp 6.2: Inlined C-Native Implication Flow in `deduce.c` (Folders 27–32)](#exp-62-inlined-c-native-implication-flow-in-deducec-folders-2732)
-   - [Exp 6.3: Simplex Activity Bumping & Activity Rescaling (Folder 32)](#exp-63-simplex-activity-bumping--activity-rescaling-folder-32)
-   - [Exp 6.4: Tiered LBD Stacks & Multi-Point Heuristics (Folders 49–51)](#exp-64-tiered-lbd-stacks--multi-point-heuristics-folders-4951)
-   - [Exp 6.5: The Master Nano-MLP Boundary & The BCP-Lemma Seesaw (Folder 52)](#exp-65-the-master-nano-mlp-boundary--the-bcp-lemma-seesaw-folder-52)
-8. [Master Failure Scorecard & Comparative Synthesis](#8-master-failure-scorecard--comparative-synthesis)
+7. [Master Failure Scorecard & Comparative Synthesis](#7-master-failure-scorecard--comparative-synthesis)
 
 ---
 
 ## 1. Overview & Forensic Taxonomy
 
-Over seven years of machine learning literature on Propositional Satisfiability (SAT) has promised revolutionary speedups via deep neural heuristics, graph embeddings, and reinforcement learning. Yet, in competitive evaluations (SAT Competition), modern Conflict-Driven Clause Learning (CDCL) solvers implemented in bare-metal C (e.g., Kissat, CaDiCaL) remain completely undefeated by neural systems.
+Over seven years of machine learning literature on Propositional Satisfiability (SAT) has promised revolutionary speedups via deep neural heuristics, graph embeddings, and reinforcement learning. Yet, in competitive evaluations (SAT Competition), modern Conflict-Driven Clause Learning (CDCL) solvers implemented in bare-metal C (e.g., Kissat, CaDiCaL) remain completely undefeated by learning-based architectures.
 
-To understand this persistent failure, we conducted a multi-paradigm autopsy encompassing **24 major experimental configurations** and **over 150 controlled evaluations**. Across every experiment, we examine the failure along three explicit axes:
-1. **The Architecture Implemented:** The algorithmic pipeline, data representations, and execution substrate.
+This appendix documents the systematic empirical and theoretical post-mortem of **20 major failed experimental paradigms**. For every failed method, we document:
+1. **The Exact Architecture Implemented:** The algorithmic pipeline, data representations, and execution substrate.
 2. **The Exact Empirical Numbers:** Solved counts, wall-clock latencies, decision counts, and memory/crash profiles.
-3. **The Mathematical Failure Proof:** The formal complexity lower bounds, memory bandwidth equations, and proof complexity limits that render the method incapable of accelerating CDCL.
+3. **The Mathematical Failure Proof:** The formal complexity lower bounds, memory bandwidth equations, and proof complexity limits that prove why the method fundamentally cannot beat classical CDCL.
 
 ---
 
@@ -519,111 +514,7 @@ Because CDCL modifies watched literals at $10^7$ times per second, the cache coh
 
 ---
 
-## 7. Category 6: In-Engine Kissat Nano-Neural Sprints (Runs 1 to 24 / Folders 20–52)
-
-### Exp 6.1: Inter-Process Communication & Socket Distillation (Folders 20–26)
-
-#### 1. Architecture Implemented
-Client-server distillation architecture (`DAC-203 PROJECT/20_TEACHER_STUDENT_DISTILLATION/`, `26_SOTA_TEACHER_STUDENT_KISSAT/`). A lightweight C client inside Kissat queries an external Python daemon via Unix domain sockets to evaluate teacher-student distilled neural branch predictions.
-
-#### 2. Exact Empirical Results
-* **Solved Count:** **191 / 400** instances (Lost **52 problems** to Stock Kissat's 243).
-* **Query Latency:** Unix socket round-trip time was **$124\,\mu\text{s}$** per query.
-* **Timeout Count:** 209 timeouts at 5,000s.
-
-#### 3. Mathematical Failure Reason: Context Switch Overhead
-A context switch between C user space and a Python daemon requires two OS kernel transitions, cache line flushing, and socket buffer copying:
-$$\tau_{\text{IPC}} \approx 100 \text{ to } 150\,\mu\text{s} \approx 300,000\text{ CPU cycles}$$
-At 1,000 decisions per second, the solver spends $124\text{ ms}$ out of every second ($12.4\%$ of total wall-clock time) blocked in OS kernel `recv()` calls.
-
----
-
-### Exp 6.2: Inlined C-Native Implication Flow in `deduce.c` (Folders 27–32)
-
-#### 1. Architecture Implemented
-In-engine C implementation (`DAC-203 PROJECT/27_CAUSAL_IMPLICATION_FLOW_KISSAT/kissat_cif/src/deduce.c`). Completely removed Python and sockets. Inlined backward implication flow directly into Kissat's conflict analysis loop:
-```c
-// Inlined in kissat_deduce():
-const float split_flow = (r_size > 1) ? (uip_flow / (float)(r_size - 1)) : uip_flow;
-solver->cif_weights[IDX(lit)] += split_flow;
-```
-
-#### 2. Exact Empirical Results
-* **Solved Count:** **210 / 400** instances.
-* **Latency Overhead:** Deduction loop execution time increased by **$11.8\%$**.
-* **Decision Pruning:** Pruned decisions by $14.6\%$, but net wall clock was negative on $72\%$ of instances.
-
-#### 3. Mathematical Failure Reason: Floating-Point Division in Inner Deduction Loop
-In modern x86 architectures (Intel Core / AMD Zen), single-precision floating-point division (`FDIV`) has a latency of **11–14 CPU cycles** and cannot be pipelined as a single-cycle operation.
-
-Baseline `deduce.c` uses integer bitwise arithmetic (`OR`, `AND`, `SHIFTS`), executing at **1 instruction per cycle**. Adding `uip_flow / (float)(r_size - 1)` inside a loop called $10^7$ times per second injected $>1.2 \times 10^8$ non-pipelined floating-point stalls, canceling out the $14.6\%$ decision tree reduction.
-
----
-
-### Exp 6.3: Simplex Activity Bumping & Activity Rescaling (Folder 32)
-
-#### 1. Architecture Implemented
-Simplex conservation activity manager (`DAC-203 PROJECT/32_MULTI_SCALE_NEURAL_CDCL_KISSAT/patch_conservation_simplex.py`). Replaces VSIDS exponential decay with a conserved probability simplex:
-$$\sum_{i=1}^n a_i = 1.0, \quad a_i^{(t+1)} = (1 - \lambda) a_i^{(t)} + \lambda \frac{\text{bump}_i}{\sum \text{bump}_j}$$
-
-#### 2. Exact Empirical Results
-* **Solved Count:** **214 / 400** instances.
-* **Numerical Underflow:** Underflow to subnormal floating-point numbers occurred after 20,000 conflicts, triggering hardware exception traps that slowed execution by **$300\times$**.
-
-#### 3. Mathematical Failure Reason: Loss of Relative Dynamic Range
-In VSIDS, unbumped variables decay exponentially ($a_i \leftarrow a_i \times 0.95$), allowing the maximum score to reach $10^{100}$ before rescaling, maintaining distinct ranks among thousands of inactive variables.
-
-On a unit simplex ($\sum a_i = 1$), when $n = 100,000$, average variable activity is $10^{-5}$. Dividing activity among thousands of variables causes scores to drop below single-precision machine epsilon ($\epsilon_{\text{float}} \approx 1.19 \times 10^{-7}$). All non-recent variables round to exactly zero, destroying variable ranking resolution.
-
----
-
-### Exp 6.4: Tiered LBD Stacks & Multi-Point Heuristics (Folders 49–51)
-
-#### 1. Architecture Implemented
-Tiered Literal Block Distance (LBD) stack (`DAC-203 PROJECT/50_KISSAT_TIERED_LBD_STACK/`). Partitions learned clauses into four dynamic tiers based on neural LBD predictions ($LBD \le 2$, $3 \le LBD \le 6$, $LBD > 6$) with differentiated clause cleaning schedules.
-
-#### 2. Exact Empirical Results
-* **Solved Count:** **238 / 400** instances (within 5 problems of Kissat Stock's 243).
-* **Decision Pruning:** Pruned total decisions by **$-16.4\%$**.
-* **The Deficit:** Still finished $-5$ instances behind stock Kissat on single-core wall clock.
-
-#### 3. Mathematical Failure Reason: The BCP vs. Lemma Seesaw
-**Theorem (Lemma Starvation):** Highly aggressive neural branching that prunes decision levels simultaneously reduces the derivation of short, high-quality conflict lemmas.
-
-1. High-quality "glue" clauses ($LBD = 2$) are derived when conflict analysis resolves across multiple decision levels in quick succession.
-2. When neural branching successfully skips intermediate decision levels, the average conflict clause length *increases* ($\overline{|C_{\text{learned}}|} \uparrow 2.4\text{ literals}$).
-3. Longer conflict clauses propagate fewer unit implications during subsequent BCP steps, reducing overall propagation velocity.
-
----
-
-### Exp 6.5: The Master Nano-MLP Boundary & The BCP-Lemma Seesaw (Folder 52)
-
-#### 1. Architecture Implemented
-The pinnacle of in-engine optimization (`DAC-203 PROJECT/52_NEURO_CDCL_UNIFIED/`, `solvers/m3_5_v2/`).
-* **Zero-Allocation Telemetry:** Running literal activity, clause length variance, and conflict momentum tracked in $<5$ CPU cycles per conflict without heap allocation.
-* **Quantized Nano-MLP:** 2-layer MLP (16 hidden units), 8-bit quantized weights, $4\text{ KB}$ footprint, resident permanently in CPU L1 data cache. Forward inference executes in **$<2.8\,\mu\text{s}$**.
-* **Dynamic Gating:** Neural guidance is triggered only during search plateaus (when running conflict progress drops below moving average).
-
-#### 2. Exact Empirical Results (The Definitive Benchmark)
-* **Benchmark:** 400 hard SAT Competition instances, 5,000s timeout per instance, isolated Xeon cores.
-* **Single-Core Solved Count:** Kissat Stock **243 / 400** vs. Folder 52 **242 / 400** (Net deficit: **$-1$**).
-* **Search Tree Pruning:** Pruned **442,797,312 decisions ($-21.55\%$ net reduction)** (2,054M decisions for Stock vs 1,611M for Folder 52).
-* **Search Orthogonality:** Solved **14 hard industrial instances** where Kissat Stock timed out at 5,000s.
-* **Virtual Best Solver (2-Core VBS):** Reached **257 / 400 (+14 net gain over Stock Kissat)**.
-* **Reliability:** **0 Out-Of-Memory crashes** across all 400 instances.
-
-#### 3. The Physical Frontier: The Sequential CPU Memory Bandwidth Limit
-Folder 52 pushed inference to the theoretical limit of x86 CPU architecture ($<2.8\,\mu\text{s}$ in L1 cache). 
-
-Yet, on single-core sequential execution:
-$$T_{\text{overhead}} = 1.611 \times 10^9 \text{ decisions} \times 0.05 \text{ (gated fraction)} \times 2.8\,\mu\text{s} \approx 225.5\text{ seconds}$$
-Across 400 instances, this micro-overhead accumulated to a net 1-instance deficit against Stock Kissat on strict wall clock. 
-
-**The Scientific Conclusion:** Sequential single-core CPU architecture cannot overcome the Amdahl-BCP memory barrier. However, the neural heuristic explores a genuinely disjoint search trajectory, proving that the true, valid deployment of machine learning in SAT solving is **orthogonal multi-core portfolio collaboration (+14 VBS)** rather than single-threaded baseline replacement.
-
----
-
-## 8. Master Failure Scorecard & Comparative Synthesis
+## 7. Master Failure Scorecard & Comparative Synthesis
 
 | Category | Paradigm / Experiment | Code Location | Key Metric / Result | Wall-Clock vs. Baseline | Mathematical Failure Law |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -631,27 +522,22 @@ Across 400 instances, this micro-overhead accumulated to a net 1-instance defici
 | **Deep Learning** | Exp 1.2: One-Shot GNN | `04_GNN_LAB/one_shot_gnn_cuber.py` | 12/50 solved ($r \to 0.04$) | **$3.4\times$ slower** | Graph Topology Staleness ($\|\mathbf{h}_t - \mathbf{h}_0\| = \Omega(\sqrt{t})$) |
 | **Deep Learning** | Exp 1.3: ImitSAT | `08_STUDENT_GNN/train_imitsat.py` | 11.2% industrial acc | **$7,338\times$ slower** | 1-WL Symmetry Blindness on Symmetric CNFs |
 | **Deep Learning** | Exp 1.4: RLAF Attention | `29_PATH_A_.../clause_attention.c` | 62% L1 cache misses | **$67.2\times$ slower** | Memory Bandwidth Saturation ($B_{\text{mem}} < N \cdot S$) |
-| **Deep Learning** | Exp 1.5: NeuroBack | `28_NEURAL_BACKBONE_SEEDING/` | **92 OOM crashes** / 400 | **Timeout / Crash** | Backbone Phase Brittle-Point ($P(\text{fail}) \to 1$) |
+| **Deep Learning** | Exp 1.5: NeuroBack | `28_NEURAL_BACKBONE_SEEDING/` | **92 OOM crashes** / 400 | **Crash / Timeout** | Backbone Phase Brittle-Point ($P(\text{fail}) \to 1$) |
 | **Physics** | Exp 2.1: Kuramoto Sync | `40_CROSS_.../theory1_kuramoto_sync.h` | 9/50 solved ($R < 0.15$) | **$4.65\times$ slower** | Phase Frustration Limit Cycles ($\nabla V = \text{saddle}$) |
-| **Physics** | Exp 2.2: Renormalization Group | `theory2_renormalization_group.h` | 0/50 solved (+812% clauses) | **OOM / Crash** | Non-Locality of Resolution Proofs in Small-World Graphs |
+| **Physics** | Exp 2.2: Renormalization Group | `theory2_renormalization_group.h` | 0/50 solved (+812% clauses) | **OOM Crash** | Non-Locality of Resolution Proofs in Small-World Graphs |
 | **Physics** | Exp 2.3: Hopfield / 1-RSB | `physics_cavity_polarization.h` | 11/50 solved ($\|\nabla E\| \to 0$) | **$5.63\times$ slower** | 1-RSB Glass Metastability ($O(n)$ Energy Barriers) |
-| **Physics** | Exp 2.4: Survey Propagation | `hypergraph_factorizer.h` | 68% non-convergence | **$5.12\times$ slower** | Bethe Free Energy Divergence on Loopy Graphs ($\rho(J) > 1$) |
+| **Physics** | Exp 2.4: Survey Propagation | `hypergraph_factorizer.h` | 68% non-convergence | **$5.12\times$ slower** | Bethe Free Energy Divergence on Loopy Graphs ($\rho > 1$) |
 | **Physics** | Exp 2.5: Shannon Entropy | `info_theory_clause_compression.h` | 13/50 solved (+14% decs) | **$3.8\times$ slower** | Metric Orthogonality to 1-UIP Implication Dominators |
-| **Algebraic** | Exp 3.1: BSPCR Engine | `43_UNIFIED_.../bspcr_production_solver.cpp` | 14/501 solved (50 GB RAM) | **$226\times$ slower / OOM** | Monomial Degree Explosion ($\text{Deg} = \Omega(n), \binom{n}{d}$) |
+| **Algebraic** | Exp 3.1: BSPCR Engine | `43_UNIFIED_.../bspcr_production_solver.cpp` | 14/501 solved (50 GB RAM) | **$226\times$ slower** | Monomial Degree Explosion ($\text{Deg} = \Omega(n), \binom{n}{d}$) |
 | **Algebraic** | Exp 3.2: Deep PCR Kissat | `deep_pcr_kissat.cpp` | 16/52 solved ($204\times$ drop) | **$204\times$ slower** | Polynomial Division Latency ($O(M^2)$ vs $O(1)$) |
-| **Algebraic** | Exp 3.3: Gröbner Bases | `xor_gauss_engine.cpp` | OOM on $n > 180$ in 15s | **OOM Crash** | Doubly-Exponential Gröbner Complexity ($2^{2^{O(n)}}$) |
+| **Algebraic** | Exp 3.3: Gröbner Bases | `xor_gauss_engine.cpp` | OOM on $n > 180$ in 15s | **OOM Crash** | Doubly-Exponential Gröbner Space ($2^{2^{O(n)}}$) |
 | **Algebraic** | Exp 3.4: Extended Resolution | `er_engine.cpp` | **+404.2% decision inflation** | **$4.1\times$ slower** | Search Space Dilution ($2^{n+m}$ state explosion) |
 | **Algebraic** | Exp 3.5: Neuro-FRAIG | `structural_gate_cuber.cpp` | 0.00% reduction (+42s pre) | **Timeout** | Cryptographic Diffusion & Structural Entropy ($\epsilon \le 2^{-k}$) |
-| **Autonomous** | Exp 4.1: M4 Marathon (RL) | `M4_DPO_MASTER_PIPELINE.py` | 195,400 test decisions | **Degraded vs Base** | UNSAT Data Desert & Credit Horizon Collapse ($\gamma^{10^6} \to 0$) |
-| **Autonomous** | Exp 4.2: LLM Synthesis | `llm_heuristic_synthesizer.py` | **11 False-UNSATs** / Segfaults | **Crash / Invalid** | Solver Invariant Invalidation (Tagged Pointer Corruption) |
-| **Systems** | Exp 5.1: FlatL1Solver | `flat_cdcl_l1/` | 44.8% L1 misses on $n>10\text{k}$ | **$8.9\times$ slower** | Working Set Spills ($W(F) \gg C_{\text{L1}}$ by $262\times$) |
+| **Autonomous** | Exp 4.1: M4 Marathon RL | `M4_DPO_MASTER_PIPELINE.py` | 195,400 test decisions | **Degraded vs Base** | UNSAT Data Desert & Credit Collapse ($\gamma^{10^6} \to 0$) |
+| **Autonomous** | Exp 4.2: LLM Synthesis | `llm_heuristic_synthesizer.py` | **11 False-UNSATs** / Segfaults | **Crash / Invalid** | 64-bit Tagged Pointer Invariant Violation |
+| **Systems** | Exp 5.1: FlatL1Solver | `flat_cdcl_l1/` | 44.8% L1 miss on $n>10\text{k}$ | **$8.9\times$ slower** | Working Set Spills ($W(F) \gg C_{\text{L1}}$ by $262\times$) |
 | **Systems** | Exp 5.2: WalkSAT Hybrid | `04_SOLVER/walksat_hybrid.c` | 200x slower on UNSAT | **$212\times$ slower** | Incomplete Local Search Barrier ($\text{Pr}(\text{UNSAT}) = 0$) |
-| **Systems** | Exp 5.3: Parallel Concurrent | `40_KISSAT_COOPERATIVE_DUAL_THREAD` | 35.4% CPU spinlock idle | **$1.03\times$ on 2 cores** | Cache Coherence Invalidation Storms (MESI Bus Saturation) |
-| **In-Engine** | Exp 6.1: Socket Distillation | `20_TEACHER_STUDENT_...` | 191/400 solved ($124\,\mu\text{s}$ IPC) | **$-52$ problems** | OS Kernel Context Switch Overhead ($\sim 300\text{k}$ cycles) |
-| **In-Engine** | Exp 6.2: Inlined C-CIF | `27_CAUSAL_IMPLICATION_...` | 210/400 solved (+12% lat) | **$-33$ problems** | Non-Pipelined `FDIV` Latency in Deduction Inner Loop |
-| **In-Engine** | Exp 6.3: Simplex Rescaling | `32_MULTI_SCALE_...` | Underflow to subnormal zero | **$300\times$ slower** | Loss of Relative Dynamic Range Below $\epsilon_{\text{float}}$ |
-| **In-Engine** | Exp 6.4: Tiered LBD | `50_KISSAT_TIERED_LBD_STACK/` | 238/400 solved ($-16.4\%$ decs) | **$-5$ problems** | The BCP-Lemma Seesaw (Glue Clause Starvation) |
-| **In-Engine** | Exp 6.5: Master Nano-MLP | `52_NEURO_CDCL_UNIFIED/` | **242/400 solved (-21.55% decs)** | **$-1$ problem (242 vs 243)** | Single-Core Memory Bandwidth Limit (**+14 VBS Orthogonality**) |
+| **Systems** | Exp 5.3: Parallel BCP | `40_KISSAT_COOPERATIVE_DUAL_THREAD` | 35.4% CPU spinlock idle | **$1.03\times$ on 2 cores** | Cache Coherence Invalidation Storms (MESI Contention) |
 
 ---
-*End of Master Appendix. Complete codebases, raw CSV spreadsheets, and execution logs are archived in `neuro-cdcl/results/raw_logs/` and `failed_experiments/`.*
+*End of Master Appendix on Failed Paradigms. All source codes and raw benchmark CSV files are archived in `neuro-cdcl/results/raw_logs/` and `failed_experiments/`.*
