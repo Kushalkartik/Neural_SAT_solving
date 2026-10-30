@@ -89,7 +89,7 @@ Documenting these failure mechanisms with exact telemetry, mathematical theorems
 
 ## 4. Structure of this Forensic Archive
 
-This archive is partitioned into 9 exhaustive technical dossiers:
+This archive is partitioned into 10 exhaustive technical dossiers:
 
 1. [`01_DEEP_LEARNING_AND_GNN_IN_LOOP.md`](01_DEEP_LEARNING_AND_GNN_IN_LOOP.md)  
    *Detailed autopsies of Graph-Q-SAT, One-Shot GNNs, Imitation Learning, RLAF, Backbone Seeding, and Neural Cube-and-Conquer.*
@@ -109,3 +109,5 @@ This archive is partitioned into 9 exhaustive technical dossiers:
    *Polynomial Calculus with Resolution (BSPCR / Deep PCR / Neuro-PCR V2): Degree-1 Affine $\mathbb{F}_2$ equations, Degree-2 Bilinear At-Most-One (AMO) cliques, Nullstellensatz degree lower bounds, Gröbner basis monomial explosion, and bounded-degree completeness collapse.*
 9. [`09_RL_DAGGER_AND_AUTONOMOUS_M4_MARATHON.md`](09_RL_DAGGER_AND_AUTONOMOUS_M4_MARATHON.md)  
    *The 26-hour M4 Autonomous Laboratory Marathon (Versions V1 through V7): Tree Teacher DAgger, Mixture of Experts (MoE) neural routers (`E_STRUCT`, `E_RANDOM_HARD`, `E_INDIST`), The UNSAT Training Data Desert, The 4-Instance Cap Trap (195k artificial decisions), and Reinforcement Learning credit assignment limits.*
+10. [`10_COMPREHENSIVE_EXPERIMENT_ENCYCLOPEDIA.md`](10_COMPREHENSIVE_EXPERIMENT_ENCYCLOPEDIA.md)  
+   *Kuramoto Synchronization, Wilsonian Renormalization Group, Epidemic Percolation Firewalls, Continuous Hopfield/SDP 1-RSB Glass Transitions, LLM Runtime Heuristic Synthesis (Qwen Conquer), NeuroDAG Circuit Graphs, The 64-Bit Tagged Watch Pointer Defect (11 False-UNSATs on Industrial Benchmarks), and The Chvátal-Szemerédi $2^{\Omega(n)}$ Proof Complexity Barrier.*
