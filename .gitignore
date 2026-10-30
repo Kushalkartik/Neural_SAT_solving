@@ -31,6 +31,7 @@ desktop.ini
 
 # Temporary and log files
 *.log
+!results/execution_logs/*.log
 *.tmp
 temp_*
 debug_*
