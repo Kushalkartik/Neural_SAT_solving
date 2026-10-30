@@ -1,0 +1,1218 @@
+[
+  {
+    "benchmark": "uf100-01",
+    "category": "SATLIB",
+    "solvers": {
+      "Kissat": {
+        "status": "SAT",
+        "wall_ms": 31.477399985305965,
+        "decisions": 254,
+        "conflicts": 207,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "SAT",
+        "wall_ms": 17.121899989433587,
+        "decisions": 45,
+        "conflicts": 27,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "SAT",
+        "wall_ms": 0.994,
+        "decisions": 266,
+        "conflicts": 208,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "SAT",
+        "wall_ms": 1.427,
+        "decisions": 361,
+        "conflicts": 273,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "SAT",
+        "wall_ms": 0.38,
+        "decisions": 53,
+        "conflicts": 24,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "SAT",
+        "wall_ms": 0.42,
+        "decisions": 102,
+        "conflicts": 76,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "SAT",
+        "wall_ms": 0.52,
+        "decisions": 148,
+        "conflicts": 109,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "SAT",
+        "wall_ms": 1.55,
+        "decisions": 492,
+        "conflicts": 405,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "SAT",
+        "wall_ms": 1.27,
+        "decisions": 298,
+        "conflicts": 228,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "SAT",
+        "wall_ms": 1.21,
+        "decisions": 298,
+        "conflicts": 228,
+        "verified": true
+      }
+    }
+  },
+  {
+    "benchmark": "uf100-02",
+    "category": "SATLIB",
+    "solvers": {
+      "Kissat": {
+        "status": "SAT",
+        "wall_ms": 33.64759997930378,
+        "decisions": 99,
+        "conflicts": 81,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "SAT",
+        "wall_ms": 23.85989995673299,
+        "decisions": 174,
+        "conflicts": 152,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "SAT",
+        "wall_ms": 1.158,
+        "decisions": 316,
+        "conflicts": 259,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "SAT",
+        "wall_ms": 0.661,
+        "decisions": 106,
+        "conflicts": 73,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "SAT",
+        "wall_ms": 0.39,
+        "decisions": 60,
+        "conflicts": 25,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "SAT",
+        "wall_ms": 2.09,
+        "decisions": 685,
+        "conflicts": 585,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "SAT",
+        "wall_ms": 0.89,
+        "decisions": 305,
+        "conflicts": 240,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "SAT",
+        "wall_ms": 1.28,
+        "decisions": 371,
+        "conflicts": 304,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "SAT",
+        "wall_ms": 1.77,
+        "decisions": 498,
+        "conflicts": 418,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "SAT",
+        "wall_ms": 1.74,
+        "decisions": 498,
+        "conflicts": 418,
+        "verified": true
+      }
+    }
+  },
+  {
+    "benchmark": "uuf100-01",
+    "category": "SATLIB",
+    "solvers": {
+      "Kissat": {
+        "status": "UNSAT",
+        "wall_ms": 36.48309991694987,
+        "decisions": 600,
+        "conflicts": 541,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "UNSAT",
+        "wall_ms": 18.278799951076508,
+        "decisions": 474,
+        "conflicts": 460,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "UNSAT",
+        "wall_ms": 1.045,
+        "decisions": 282,
+        "conflicts": 240,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "UNSAT",
+        "wall_ms": 1.365,
+        "decisions": 327,
+        "conflicts": 284,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "UNSAT",
+        "wall_ms": 1.08,
+        "decisions": 344,
+        "conflicts": 280,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "UNSAT",
+        "wall_ms": 1.49,
+        "decisions": 545,
+        "conflicts": 474,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "UNSAT",
+        "wall_ms": 1.18,
+        "decisions": 427,
+        "conflicts": 359,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "UNSAT",
+        "wall_ms": 1.68,
+        "decisions": 521,
+        "conflicts": 431,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "UNSAT",
+        "wall_ms": 1.54,
+        "decisions": 409,
+        "conflicts": 359,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "UNSAT",
+        "wall_ms": 1.52,
+        "decisions": 409,
+        "conflicts": 359,
+        "verified": true
+      }
+    }
+  },
+  {
+    "benchmark": "uuf100-02",
+    "category": "SATLIB",
+    "solvers": {
+      "Kissat": {
+        "status": "UNSAT",
+        "wall_ms": 35.557499970309436,
+        "decisions": 702,
+        "conflicts": 591,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "UNSAT",
+        "wall_ms": 18.560700002126396,
+        "decisions": 1271,
+        "conflicts": 1203,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "UNSAT",
+        "wall_ms": 1.939,
+        "decisions": 631,
+        "conflicts": 528,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "UNSAT",
+        "wall_ms": 2.482,
+        "decisions": 671,
+        "conflicts": 575,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "UNSAT",
+        "wall_ms": 1.82,
+        "decisions": 628,
+        "conflicts": 521,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "UNSAT",
+        "wall_ms": 2.09,
+        "decisions": 750,
+        "conflicts": 621,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "UNSAT",
+        "wall_ms": 1.86,
+        "decisions": 686,
+        "conflicts": 582,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "UNSAT",
+        "wall_ms": 2.42,
+        "decisions": 773,
+        "conflicts": 648,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "UNSAT",
+        "wall_ms": 2.64,
+        "decisions": 861,
+        "conflicts": 698,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "UNSAT",
+        "wall_ms": 2.62,
+        "decisions": 861,
+        "conflicts": 698,
+        "verified": true
+      }
+    }
+  },
+  {
+    "benchmark": "uf200-01",
+    "category": "SATLIB",
+    "solvers": {
+      "Kissat": {
+        "status": "SAT",
+        "wall_ms": 315.66020008176565,
+        "decisions": 35814,
+        "conflicts": 23838,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "SAT",
+        "wall_ms": 96.17619996424764,
+        "decisions": 10700,
+        "conflicts": 8664,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "SAT",
+        "wall_ms": 39.574,
+        "decisions": 6539,
+        "conflicts": 5248,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "SAT",
+        "wall_ms": 12.285,
+        "decisions": 2396,
+        "conflicts": 1787,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "SAT",
+        "wall_ms": 10.2,
+        "decisions": 2322,
+        "conflicts": 1701,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "SAT",
+        "wall_ms": 18.47,
+        "decisions": 4072,
+        "conflicts": 3095,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "SAT",
+        "wall_ms": 14.42,
+        "decisions": 3331,
+        "conflicts": 2569,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "SAT",
+        "wall_ms": 8.15,
+        "decisions": 2062,
+        "conflicts": 1492,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "SAT",
+        "wall_ms": 13.51,
+        "decisions": 2886,
+        "conflicts": 1913,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "SAT",
+        "wall_ms": 12.25,
+        "decisions": 2886,
+        "conflicts": 1913,
+        "verified": true
+      }
+    }
+  },
+  {
+    "benchmark": "uf200-02",
+    "category": "SATLIB",
+    "solvers": {
+      "Kissat": {
+        "status": "SAT",
+        "wall_ms": 59.15900005493313,
+        "decisions": 3169,
+        "conflicts": 2608,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "SAT",
+        "wall_ms": 156.31429990753531,
+        "decisions": 16103,
+        "conflicts": 13826,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "SAT",
+        "wall_ms": 44.227,
+        "decisions": 7486,
+        "conflicts": 5976,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "SAT",
+        "wall_ms": 47.258,
+        "decisions": 7206,
+        "conflicts": 5857,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "SAT",
+        "wall_ms": 0.82,
+        "decisions": 174,
+        "conflicts": 53,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "SAT",
+        "wall_ms": 33.59,
+        "decisions": 6653,
+        "conflicts": 4818,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "SAT",
+        "wall_ms": 5.74,
+        "decisions": 1517,
+        "conflicts": 1133,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "SAT",
+        "wall_ms": 38.02,
+        "decisions": 5719,
+        "conflicts": 4459,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "SAT",
+        "wall_ms": 42.38,
+        "decisions": 7859,
+        "conflicts": 5710,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "SAT",
+        "wall_ms": 42.41,
+        "decisions": 7859,
+        "conflicts": 5710,
+        "verified": true
+      }
+    }
+  },
+  {
+    "benchmark": "N=200",
+    "category": "ScaleShift",
+    "solvers": {
+      "Kissat": {
+        "status": "SAT",
+        "wall_ms": 34.7069000126794,
+        "decisions": 392,
+        "conflicts": 269,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "SAT",
+        "wall_ms": 17.75420003104955,
+        "decisions": 59,
+        "conflicts": 17,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "SAT",
+        "wall_ms": 0.873,
+        "decisions": 118,
+        "conflicts": 43,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "SAT",
+        "wall_ms": 1.003,
+        "decisions": 143,
+        "conflicts": 67,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "SAT",
+        "wall_ms": 0.51,
+        "decisions": 123,
+        "conflicts": 5,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "SAT",
+        "wall_ms": 2.22,
+        "decisions": 713,
+        "conflicts": 434,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "SAT",
+        "wall_ms": 0.74,
+        "decisions": 208,
+        "conflicts": 105,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "SAT",
+        "wall_ms": 1.07,
+        "decisions": 172,
+        "conflicts": 88,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "SAT",
+        "wall_ms": 0.94,
+        "decisions": 131,
+        "conflicts": 6,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "SAT",
+        "wall_ms": 1.02,
+        "decisions": 131,
+        "conflicts": 6,
+        "verified": true
+      }
+    }
+  },
+  {
+    "benchmark": "N=500",
+    "category": "ScaleShift",
+    "solvers": {
+      "Kissat": {
+        "status": "SAT",
+        "wall_ms": 54.780100006610155,
+        "decisions": 3184,
+        "conflicts": 1575,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "SAT",
+        "wall_ms": 42.51010005827993,
+        "decisions": 439,
+        "conflicts": 220,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "SAT",
+        "wall_ms": 2.198,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "SAT",
+        "wall_ms": 1.664,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "SAT",
+        "wall_ms": 1.33,
+        "decisions": 298,
+        "conflicts": 7,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "SAT",
+        "wall_ms": 1.36,
+        "decisions": 402,
+        "conflicts": 84,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "SAT",
+        "wall_ms": 1.2,
+        "decisions": 335,
+        "conflicts": 66,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "SAT",
+        "wall_ms": 15.75,
+        "decisions": 2604,
+        "conflicts": 1319,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "SAT",
+        "wall_ms": 2.96,
+        "decisions": 404,
+        "conflicts": 80,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "SAT",
+        "wall_ms": 1.07,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      }
+    }
+  },
+  {
+    "benchmark": "N=1000",
+    "category": "ScaleShift",
+    "solvers": {
+      "Kissat": {
+        "status": "SAT",
+        "wall_ms": 48.0115000391379,
+        "decisions": 2328,
+        "conflicts": 521,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "SAT",
+        "wall_ms": 60.68610004149377,
+        "decisions": 5654,
+        "conflicts": 2104,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "SAT",
+        "wall_ms": 3.885,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "SAT",
+        "wall_ms": 3.276,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "SAT",
+        "wall_ms": 2.5,
+        "decisions": 504,
+        "conflicts": 2,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "SAT",
+        "wall_ms": 3.43,
+        "decisions": 1091,
+        "conflicts": 204,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "SAT",
+        "wall_ms": 9.12,
+        "decisions": 2803,
+        "conflicts": 784,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "SAT",
+        "wall_ms": 9.9,
+        "decisions": 2062,
+        "conflicts": 620,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "SAT",
+        "wall_ms": 4.93,
+        "decisions": 360,
+        "conflicts": 20,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "SAT",
+        "wall_ms": 1.6,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      }
+    }
+  },
+  {
+    "benchmark": "Steiner-15 (N=150)",
+    "category": "Industrial",
+    "solvers": {
+      "Kissat": {
+        "status": "UNSAT",
+        "wall_ms": 18.781700055114925,
+        "decisions": 266,
+        "conflicts": 251,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "UNSAT",
+        "wall_ms": 20.325200050137937,
+        "decisions": 475,
+        "conflicts": 276,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "UNSAT",
+        "wall_ms": 0.776,
+        "decisions": 227,
+        "conflicts": 210,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "UNSAT",
+        "wall_ms": 0.935,
+        "decisions": 269,
+        "conflicts": 244,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "UNSAT",
+        "wall_ms": 0.67,
+        "decisions": 224,
+        "conflicts": 203,
+        "verified": true
+      },
+      "Science_Control_PID": {
+        "status": "UNSAT",
+        "wall_ms": 0.7,
+        "decisions": 266,
+        "conflicts": 237,
+        "verified": true
+      },
+      "Science_Info_Theory": {
+        "status": "UNSAT",
+        "wall_ms": 0.7,
+        "decisions": 266,
+        "conflicts": 237,
+        "verified": true
+      },
+      "Science_Spectral_Cut": {
+        "status": "UNSAT",
+        "wall_ms": 0.7,
+        "decisions": 244,
+        "conflicts": 213,
+        "verified": true
+      },
+      "Science_Grand_Synthesis": {
+        "status": "UNSAT",
+        "wall_ms": 0.76,
+        "decisions": 244,
+        "conflicts": 226,
+        "verified": true
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "UNSAT",
+        "wall_ms": 0.8,
+        "decisions": 244,
+        "conflicts": 226,
+        "verified": true
+      }
+    }
+  },
+  {
+    "benchmark": "BMC-170055892 (N=320)",
+    "category": "Industrial",
+    "solvers": {
+      "Kissat": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "CaDiCaL": {
+        "status": "SAT",
+        "wall_ms": 3096.521500032395,
+        "decisions": 292548,
+        "conflicts": 153033,
+        "verified": true
+      },
+      "M5.1_Sound": {
+        "status": "SAT",
+        "wall_ms": 32.7,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": true
+      },
+      "SuperD2": {
+        "status": "SAT",
+        "wall_ms": 32.027,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": true
+      },
+      "Science_Physics_SP": {
+        "status": "TIMEOUT",
+        "wall_ms": 10017.99,
+        "decisions": 407385,
+        "conflicts": 311296,
+        "verified": false
+      },
+      "Science_Control_PID": {
+        "status": "TIMEOUT",
+        "wall_ms": 10015.19,
+        "decisions": 496910,
+        "conflicts": 248832,
+        "verified": false
+      },
+      "Science_Info_Theory": {
+        "status": "TIMEOUT",
+        "wall_ms": 10039.8,
+        "decisions": 455025,
+        "conflicts": 348160,
+        "verified": false
+      },
+      "Science_Spectral_Cut": {
+        "status": "TIMEOUT",
+        "wall_ms": 10261.45,
+        "decisions": 408699,
+        "conflicts": 311296,
+        "verified": false
+      },
+      "Science_Grand_Synthesis": {
+        "status": "TIMEOUT",
+        "wall_ms": 10003.85,
+        "decisions": 582710,
+        "conflicts": 275456,
+        "verified": false
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "SAT",
+        "wall_ms": 31.04,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      }
+    }
+  },
+  {
+    "benchmark": "BMC-170104584 (N=320)",
+    "category": "Industrial",
+    "solvers": {
+      "Kissat": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "CaDiCaL": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "M5.1_Sound": {
+        "status": "TIMEOUT",
+        "wall_ms": 10109.327,
+        "decisions": 434472,
+        "conflicts": 325632,
+        "verified": false
+      },
+      "SuperD2": {
+        "status": "TIMEOUT",
+        "wall_ms": 10012.314,
+        "decisions": 430923,
+        "conflicts": 320512,
+        "verified": false
+      },
+      "Science_Physics_SP": {
+        "status": "TIMEOUT",
+        "wall_ms": 10009.15,
+        "decisions": 472523,
+        "conflicts": 366592,
+        "verified": false
+      },
+      "Science_Control_PID": {
+        "status": "TIMEOUT",
+        "wall_ms": 10019.79,
+        "decisions": 586639,
+        "conflicts": 291840,
+        "verified": false
+      },
+      "Science_Info_Theory": {
+        "status": "TIMEOUT",
+        "wall_ms": 10011.12,
+        "decisions": 578105,
+        "conflicts": 443392,
+        "verified": false
+      },
+      "Science_Spectral_Cut": {
+        "status": "TIMEOUT",
+        "wall_ms": 10006.79,
+        "decisions": 459609,
+        "conflicts": 355840,
+        "verified": false
+      },
+      "Science_Grand_Synthesis": {
+        "status": "TIMEOUT",
+        "wall_ms": 10023.0,
+        "decisions": 744021,
+        "conflicts": 356864,
+        "verified": false
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "TIMEOUT",
+        "wall_ms": 10037.99,
+        "decisions": 723503,
+        "conflicts": 347136,
+        "verified": false
+      }
+    }
+  },
+  {
+    "benchmark": "SMT-22930-11 (N=5413)",
+    "category": "Industrial",
+    "solvers": {
+      "Kissat": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "CaDiCaL": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "M5.1_Sound": {
+        "status": "TIMEOUT",
+        "wall_ms": 10059.752,
+        "decisions": 151468,
+        "conflicts": 107520,
+        "verified": false
+      },
+      "SuperD2": {
+        "status": "TIMEOUT",
+        "wall_ms": 10073.317,
+        "decisions": 141762,
+        "conflicts": 100352,
+        "verified": false
+      },
+      "Science_Physics_SP": {
+        "status": "TIMEOUT",
+        "wall_ms": 10039.53,
+        "decisions": 133610,
+        "conflicts": 96768,
+        "verified": false
+      },
+      "Science_Control_PID": {
+        "status": "TIMEOUT",
+        "wall_ms": 10137.22,
+        "decisions": 150611,
+        "conflicts": 75264,
+        "verified": false
+      },
+      "Science_Info_Theory": {
+        "status": "TIMEOUT",
+        "wall_ms": 10148.11,
+        "decisions": 141954,
+        "conflicts": 102400,
+        "verified": false
+      },
+      "Science_Spectral_Cut": {
+        "status": "TIMEOUT",
+        "wall_ms": 10044.54,
+        "decisions": 119065,
+        "conflicts": 95232,
+        "verified": false
+      },
+      "Science_Grand_Synthesis": {
+        "status": "TIMEOUT",
+        "wall_ms": 10168.03,
+        "decisions": 167670,
+        "conflicts": 77312,
+        "verified": false
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "TIMEOUT",
+        "wall_ms": 10046.41,
+        "decisions": 160857,
+        "conflicts": 73728,
+        "verified": false
+      }
+    }
+  },
+  {
+    "benchmark": "Crypto1-Seed121 (N=1545)",
+    "category": "Industrial",
+    "solvers": {
+      "Kissat": {
+        "status": "SAT",
+        "wall_ms": 5444.562599994242,
+        "decisions": 550096,
+        "conflicts": 217534,
+        "verified": true
+      },
+      "CaDiCaL": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "M5.1_Sound": {
+        "status": "TIMEOUT",
+        "wall_ms": 10050.03,
+        "decisions": 168350,
+        "conflicts": 126976,
+        "verified": false
+      },
+      "SuperD2": {
+        "status": "TIMEOUT",
+        "wall_ms": 10169.609,
+        "decisions": 120216,
+        "conflicts": 90624,
+        "verified": false
+      },
+      "Science_Physics_SP": {
+        "status": "TIMEOUT",
+        "wall_ms": 10077.03,
+        "decisions": 129179,
+        "conflicts": 93184,
+        "verified": false
+      },
+      "Science_Control_PID": {
+        "status": "TIMEOUT",
+        "wall_ms": 10402.48,
+        "decisions": 167901,
+        "conflicts": 81408,
+        "verified": false
+      },
+      "Science_Info_Theory": {
+        "status": "TIMEOUT",
+        "wall_ms": 10077.51,
+        "decisions": 140156,
+        "conflicts": 101888,
+        "verified": false
+      },
+      "Science_Spectral_Cut": {
+        "status": "TIMEOUT",
+        "wall_ms": 10110.07,
+        "decisions": 124639,
+        "conflicts": 93696,
+        "verified": false
+      },
+      "Science_Grand_Synthesis": {
+        "status": "TIMEOUT",
+        "wall_ms": 10041.27,
+        "decisions": 192920,
+        "conflicts": 86528,
+        "verified": false
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "TIMEOUT",
+        "wall_ms": 10330.43,
+        "decisions": 199677,
+        "conflicts": 89600,
+        "verified": false
+      }
+    }
+  },
+  {
+    "benchmark": "Fermat-1 (N=8716)",
+    "category": "Industrial",
+    "solvers": {
+      "Kissat": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "CaDiCaL": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "M5.1_Sound": {
+        "status": "TIMEOUT",
+        "wall_ms": 10123.608,
+        "decisions": 119535,
+        "conflicts": 51200,
+        "verified": false
+      },
+      "SuperD2": {
+        "status": "TIMEOUT",
+        "wall_ms": 10089.956,
+        "decisions": 98537,
+        "conflicts": 46080,
+        "verified": false
+      },
+      "Science_Physics_SP": {
+        "status": "TIMEOUT",
+        "wall_ms": 10081.75,
+        "decisions": 107514,
+        "conflicts": 51200,
+        "verified": false
+      },
+      "Science_Control_PID": {
+        "status": "TIMEOUT",
+        "wall_ms": 10123.1,
+        "decisions": 135046,
+        "conflicts": 47104,
+        "verified": false
+      },
+      "Science_Info_Theory": {
+        "status": "TIMEOUT",
+        "wall_ms": 10137.06,
+        "decisions": 90027,
+        "conflicts": 45568,
+        "verified": false
+      },
+      "Science_Spectral_Cut": {
+        "status": "TIMEOUT",
+        "wall_ms": 10666.93,
+        "decisions": 95957,
+        "conflicts": 49152,
+        "verified": false
+      },
+      "Science_Grand_Synthesis": {
+        "status": "TIMEOUT",
+        "wall_ms": 10032.01,
+        "decisions": 148704,
+        "conflicts": 52224,
+        "verified": false
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "TIMEOUT",
+        "wall_ms": 10011.63,
+        "decisions": 146237,
+        "conflicts": 51200,
+        "verified": false
+      }
+    }
+  },
+  {
+    "benchmark": "Crypto-AES (N=7671)",
+    "category": "Industrial",
+    "solvers": {
+      "Kissat": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "CaDiCaL": {
+        "status": "TIMEOUT",
+        "wall_ms": 10000.0,
+        "decisions": 0,
+        "conflicts": 0,
+        "verified": false
+      },
+      "M5.1_Sound": {
+        "status": "TIMEOUT",
+        "wall_ms": 10095.768,
+        "decisions": 259385,
+        "conflicts": 160256,
+        "verified": false
+      },
+      "SuperD2": {
+        "status": "TIMEOUT",
+        "wall_ms": 10746.771,
+        "decisions": 263381,
+        "conflicts": 159744,
+        "verified": false
+      },
+      "Science_Physics_SP": {
+        "status": "TIMEOUT",
+        "wall_ms": 10794.62,
+        "decisions": 272350,
+        "conflicts": 158208,
+        "verified": false
+      },
+      "Science_Control_PID": {
+        "status": "TIMEOUT",
+        "wall_ms": 10103.23,
+        "decisions": 294168,
+        "conflicts": 84480,
+        "verified": false
+      },
+      "Science_Info_Theory": {
+        "status": "TIMEOUT",
+        "wall_ms": 10221.74,
+        "decisions": 262849,
+        "conflicts": 152064,
+        "verified": false
+      },
+      "Science_Spectral_Cut": {
+        "status": "TIMEOUT",
+        "wall_ms": 10016.4,
+        "decisions": 255523,
+        "conflicts": 151552,
+        "verified": false
+      },
+      "Science_Grand_Synthesis": {
+        "status": "TIMEOUT",
+        "wall_ms": 10124.43,
+        "decisions": 307924,
+        "conflicts": 88064,
+        "verified": false
+      },
+      "Science_Synthesis_WalkSAT": {
+        "status": "TIMEOUT",
+        "wall_ms": 10422.66,
+        "decisions": 301114,
+        "conflicts": 86016,
+        "verified": false
+      }
+    }
+  }
+]

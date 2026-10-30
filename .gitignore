@@ -35,3 +35,7 @@ desktop.ini
 *.tmp
 temp_*
 debug_*
+
+# Agent skills cache
+.agent/
+
