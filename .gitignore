@@ -1,0 +1,36 @@
+# Binaries and object files
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.so
+*.dylib
+*.a
+
+# Build directories
+build/
+bin/
+cmake-build-*/
+.cache/
+
+# Python cache & environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.env
+.venv/
+env/
+venv/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary and log files
+*.log
+*.tmp
+temp_*
+debug_*

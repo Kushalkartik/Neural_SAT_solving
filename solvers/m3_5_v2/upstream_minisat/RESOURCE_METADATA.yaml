@@ -1,0 +1,18 @@
+resource_id: minisat_2_2_0
+name: "MiniSat 2.2.0"
+type: solver_source
+version: "2.2.0"
+official_source:
+  homepage: "https://minisat.se/"
+  archive: "https://minisat.se/downloads/minisat-2.2.0.tar.gz"
+  repository: "https://github.com/niklasso/minisat"
+local_path: "04_SOLVER/MINISAT/upstream/"
+acquired_at: "2026-09-17T01:53:33.878526+00:00"
+archive_filename: "minisat-2.2.0.tar.gz"
+archive_size_bytes: 43879
+archive_sha256: "92957d851cdc3baddfe07b5fc80ed5a0237c489d0c52ae72f62844b3b46d7808"
+git_tag: "releases/2.2.0"
+git_commit_sha: "eb01ad68b75bb3b34ff8657c37ad6a31faae0fc3"
+license: "MIT"
+verification_status: "VERIFIED"
+project_role: "M0 baseline solver and M1 CDCL engine"
