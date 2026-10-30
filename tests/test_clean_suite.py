@@ -47,9 +47,18 @@ def test_cadical_stock_binary_exists():
     assert '2.1.3' in p.stdout, 'CaDiCaL version must be 2.1.3'
 
 def test_weights_file_exists():
-    w = BASE_DIR / 'models/weights/structural_mlp_weights.bin'
-    assert w.exists(), 'Structural MLP weights binary must exist'
-    assert w.stat().st_size == 648, 'Structural MLP weights binary must be exactly 648 bytes'
+    w_m35 = BASE_DIR / 'models/weights/m3_5_v2/structural_mlp_weights.bin'
+    assert w_m35.exists(), 'M3.5 V2 Structural MLP weights must exist'
+    assert w_m35.stat().st_size == 648, 'Structural MLP weights must be exactly 648 bytes'
+
+    w_f52 = BASE_DIR / 'models/weights/folder52_kissat/structural_mlp_weights.h'
+    assert w_f52.exists(), 'Folder 52 Kissat C99 weights header must exist'
+
+    w_teacher = BASE_DIR / 'models/weights/folder52_kissat/best_causal_teacher.pt'
+    assert w_teacher.exists(), 'Folder 52 Causal Teacher model must exist'
+
+    inv = BASE_DIR / 'models/WEIGHTS_INVENTORY.md'
+    assert inv.exists(), 'Weights inventory document must exist'
 
 def test_benchmarks_present():
     rlaf_cnfs = list((DATA_DIR / 'rlaf').rglob('*.cnf'))
