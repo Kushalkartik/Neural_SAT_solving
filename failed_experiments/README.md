@@ -89,7 +89,7 @@ Documenting these failure mechanisms with exact telemetry, mathematical theorems
 
 ## 4. Structure of this Forensic Archive
 
-This archive is partitioned into 6 exhaustive technical dossiers:
+This archive is partitioned into 9 exhaustive technical dossiers:
 
 1. [`01_DEEP_LEARNING_AND_GNN_IN_LOOP.md`](01_DEEP_LEARNING_AND_GNN_IN_LOOP.md)  
    *Detailed autopsies of Graph-Q-SAT, One-Shot GNNs, Imitation Learning, RLAF, Backbone Seeding, and Neural Cube-and-Conquer.*
@@ -105,3 +105,7 @@ This archive is partitioned into 6 exhaustive technical dossiers:
    *Rigorous mathematical statements and proofs of the 8 fundamental failure theorems governing neural and heuristic intervention in CDCL.*
 7. [`07_CODE_LEVEL_AUTOPSIES_AND_PATCHES.md`](07_CODE_LEVEL_AUTOPSIES_AND_PATCHES.md)  
    *Line-by-line C/C++ source code autopsies, patch diffs, and exact telemetry: Causal Implication Flow in `deduce.c`, Inlined Clause Attention in `patch_deduce.py`, The Conservation Simplex in `bump.c`, Gate Extraction in `structural_gate_cuber.cpp`, XOR Gaussian Reduction, Neural CEGAR loops, and Tiered LBD cache thrashing.*
+8. [`08_POLYNOMIAL_CALCULUS_AND_ADVANCED_ALGEBRAIC.md`](08_POLYNOMIAL_CALCULUS_AND_ADVANCED_ALGEBRAIC.md)  
+   *Polynomial Calculus with Resolution (BSPCR / Deep PCR / Neuro-PCR V2): Degree-1 Affine $\mathbb{F}_2$ equations, Degree-2 Bilinear At-Most-One (AMO) cliques, Nullstellensatz degree lower bounds, Gröbner basis monomial explosion, and bounded-degree completeness collapse.*
+9. [`09_RL_DAGGER_AND_AUTONOMOUS_M4_MARATHON.md`](09_RL_DAGGER_AND_AUTONOMOUS_M4_MARATHON.md)  
+   *The 26-hour M4 Autonomous Laboratory Marathon (Versions V1 through V7): Tree Teacher DAgger, Mixture of Experts (MoE) neural routers (`E_STRUCT`, `E_RANDOM_HARD`, `E_INDIST`), The UNSAT Training Data Desert, The 4-Instance Cap Trap (195k artificial decisions), and Reinforcement Learning credit assignment limits.*
