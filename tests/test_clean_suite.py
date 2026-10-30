@@ -20,7 +20,7 @@ def test_m35_sat_solving_correctness():
     cnfs = list((DATA_DIR / 'rlaf/coloring_400').glob('*.cnf'))
     assert len(cnfs) > 0, 'RLAF Coloring 400 benchmarks must exist'
     
-    p = subprocess.run([M35_EXE, str(cnfs[0])], capture_output=True, text=True, timeout=10)
+    p = subprocess.run([M35_EXE, str(cnfs[0])], cwd=str(BASE_DIR / 'solvers/m3_5_v2'), capture_output=True, text=True, timeout=10)
     assert p.returncode in [0, 10, 20], 'Solver must exit with standard code'
     assert 'Decisions:' in p.stdout, 'Solver output must include decision telemetry'
     assert 'SATISFIABLE' in p.stdout, 'Instance must solve to SATISFIABLE'
