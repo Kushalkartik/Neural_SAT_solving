@@ -14,12 +14,16 @@
 
 Modern Conflict-Driven Clause Learning (CDCL) Boolean Constraint Propagation (BCP) executes in **15 to 30 nanoseconds** per step. Previous Graph Neural Network (GNN) branching heuristics incur **10 to 50 milliseconds** per forward pass—a $10^5\times$ latency gap that destroys wall-clock solving speed.
 
-This repository provides two complementary, 100% native C/C++ zero-overhead engines:
+This repository provides two complementary, 100% native C/C++ zero-overhead engines alongside Armin Biere's baseline SAT competition champions:
 
 1. **`M3.5 Version 2` (Microsecond SIMD-Distilled MiniSat):**  
    Compresses bipartite factor graph invariants into an ultra-compact **648-byte AVX2 SIMD MLP** executing in **$4.4\ \mu\text{s}$** directly in CPU registers and L1 cache. Paired with **Inprocessing-Sound Variable Eligibility**, M3.5 V2 strictly outperforms RLAF (ICLR 2026) across Erdös-Rényi 3-Coloring and Random 3-SAT by up to **90.5% in decisions** and up to **$67.2\times$ in wall-clock speed**.
 2. **`Folder 52` (NeuroCDCL Kissat Flagship):**  
    Embeds **Causal Implication Flow (CIF)** and **Micro-Neural Causal Flow (MNCF)** directly into Armin Biere's **Kissat 4.0.1** core. Operates at **$<15\text{ ns}$ per step** with zero GPU dependency, matching NeuroBack on Clique backdoors (**6.3 decisions**) and solving **242 / 400 benchmarks** with **11 direct knockouts** on the SAT Competition 2020–2024 main tracks.
+3. **`Kissat Stock 4.0.1` (`solvers/kissat_stock/`):**  
+   Upstream, unmodified reference build of Armin Biere's SAT Competition winner.
+4. **`CaDiCaL Stock 2.1.3` (`solvers/cadical_stock/`):**  
+   Upstream, unmodified reference build of Armin Biere's leading state-of-the-art CDCL solver.
 
 ---
 
@@ -39,9 +43,46 @@ Full 4-page audit document: [`docs/DAC203_DEFINITIVE_ML4SAT_OFFICIAL_AUDIT.pdf`]
 
 ---
 
+## 📁 Repository Structure
+
+```
+neuro-cdcl/
+├── data/                       # 1,268+ DIMACS benchmark instances
+│   ├── rlaf/                   # 3sat_300, coloring_400, coloring_500
+│   ├── imitsat/                # imitsat_50, imitsat_100, dubois, parity, jnh
+│   ├── neuroback/              # CBS, BMS, CliqueFormula, cubature, func_synth
+│   └── industrial_400/         # UNSEEN_400_MANIFEST.csv (400 SAT Competition benchmarks)
+├── docs/                       # Definitive PDF audit reports and presentation slides
+│   ├── papers_published/       # High-res DAC203_DEFINITIVE_ML4SAT_OFFICIAL_AUDIT.pdf
+│   ├── reports/                # Complete markdown reproduction reports
+│   └── presentation/           # Course & conference presentation slides
+├── external_repos/             # Official external peer codebases
+│   ├── rlaf/                   # Learning from Algorithm Feedback (ICLR 2026)
+│   ├── imitsat/                # Learning to Solve SAT via Imitation (SAT/ICLR 2020)
+│   └── neuroback/              # Backdoor Identification with GNNs (NeurIPS 2021)
+├── models/                     # Neural architectures and AVX2 weights
+│   ├── weights/                # 648-byte structural_mlp_weights.bin
+│   └── architectures/          # PyTorch reference implementations
+├── papers_external/            # Original published peer research PDFs & analytical notes
+├── results/                    # Authoritative execution logs & telemetry CSVs
+├── scripts/                    # Reproduction harnesses & tournament scripts
+│   ├── reproduce_table1_rlaf.py
+│   ├── reproduce_table2_imitsat.py
+│   ├── reproduce_table3_neuroback.py
+│   └── run_industrial_400_tournament.py # 4-Way Head-to-Head Tournament Runner
+├── solvers/                    # Native C/C++ solver engines
+│   ├── m3_5_v2/                # M3.5 Version 2 Microsecond SIMD MiniSat
+│   ├── neuro_cdcl_f52/         # Folder 52 NeuroCDCL Kissat 4.0.1
+│   ├── kissat_stock/           # Armin Biere Kissat 4.0.1 baseline
+│   └── cadical_stock/          # Armin Biere CaDiCaL 2.1.3 baseline
+└── tests/                      # Pytest verification suite (11 unit/integration tests)
+```
+
+---
+
 ## 🛠️ Quickstart: Building & Running
 
-### 1. Build Both Solvers (Linux / Ubuntu)
+### 1. Build Solvers (Linux / Ubuntu)
 ```bash
 # Clone repository
 git clone https://github.com/username/neuro-cdcl.git
@@ -51,7 +92,7 @@ cd neuro-cdcl
 make build-all
 ```
 
-### 2. Run Reproductions (One Command)
+### 2. Run Reproductions (One-Click)
 ```bash
 # Reproduce Table 1 (RLAF ICLR 2026)
 python3 scripts/reproduce_table1_rlaf.py
@@ -68,15 +109,30 @@ python3 scripts/reproduce_table3_neuroback.py
 pytest tests/
 ```
 
+### 4. Fire 4-Way Industrial 400 SAT Tournament
+The tournament compares **Kissat Stock vs CaDiCaL Stock vs M3.5 V2 vs Folder 52** under official SAT Competition rules (cutoff: 1200.0s, PAR-2 scoring):
+
+```bash
+# Dry-run verification (checks solvers, manifest, and paths without executing)
+python3 scripts/run_industrial_400_tournament.py --dry-run
+
+# Run tournament on local benchmarks folder
+python3 scripts/run_industrial_400_tournament.py --bench-dir /path/to/benchmarks --timeout 1200.0
+
+# Quick verification run on first 10 instances with 30s timeout
+python3 scripts/run_industrial_400_tournament.py --bench-dir /path/to/benchmarks --limit 10 --timeout 30.0
+```
+
 ---
 
 ## 🐳 Docker Support
 
-To run artifact evaluation in a clean, reproducible container:
+To run artifact evaluation in a clean, reproducible Ubuntu 22.04 LTS container:
 ```bash
 docker build -t neuro-cdcl .
 docker run --rm neuro-cdcl pytest tests/
 docker run --rm neuro-cdcl python3 scripts/reproduce_table1_rlaf.py
+docker run --rm neuro-cdcl python3 scripts/run_industrial_400_tournament.py --dry-run
 ```
 
 ---

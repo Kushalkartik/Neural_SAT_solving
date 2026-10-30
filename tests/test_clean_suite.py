@@ -1,3 +1,4 @@
+import sys
 import os
 import subprocess
 import pytest
@@ -5,8 +6,12 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 M35_EXE = str(BASE_DIR / 'solvers/m3_5_v2' / ('m3_5_v2.exe' if os.name == 'nt' else 'm3_5_v2'))
-KISSAT_EXE = str(BASE_DIR / 'solvers/neuro_cdcl_f52' / ('neuro_cdcl.exe' if os.name == 'nt' else 'neuro_cdcl'))
+KISSAT_F52_EXE = str(BASE_DIR / 'solvers/neuro_cdcl_f52' / ('neuro_cdcl.exe' if os.name == 'nt' else 'neuro_cdcl'))
+KISSAT_STOCK_EXE = str(BASE_DIR / 'solvers/kissat_stock' / ('kissat.exe' if os.name == 'nt' else 'kissat'))
+CADICAL_STOCK_EXE = str(BASE_DIR / 'solvers/cadical_stock' / ('cadical.exe' if os.name == 'nt' else 'cadical'))
+
 DATA_DIR = BASE_DIR / 'data'
+EXT_REPOS_DIR = BASE_DIR / 'external_repos'
 
 def test_m35_solver_binary_exists():
     assert os.path.exists(M35_EXE), f'M3.5 v2 solver binary {M35_EXE} must exist'
@@ -21,13 +26,25 @@ def test_m35_sat_solving_correctness():
     assert 'SATISFIABLE' in p.stdout, 'Instance must solve to SATISFIABLE'
 
 def test_neuro_cdcl_kissat_binary_exists():
-    assert os.path.exists(KISSAT_EXE), f'NeuroCDCL Kissat binary {KISSAT_EXE} must exist'
+    assert os.path.exists(KISSAT_F52_EXE), f'NeuroCDCL Kissat binary {KISSAT_F52_EXE} must exist'
 
 def test_neuro_cdcl_kissat_solving_correctness():
     cnfs = list((DATA_DIR / 'rlaf/coloring_400').glob('*.cnf'))
-    p = subprocess.run([KISSAT_EXE, str(cnfs[0])], capture_output=True, text=True, timeout=10)
+    p = subprocess.run([KISSAT_F52_EXE, str(cnfs[0])], capture_output=True, text=True, timeout=10)
     assert p.returncode in [0, 10, 20], 'Kissat must exit with SAT code 10'
     assert 's SATISFIABLE' in p.stdout, 'Instance must solve to SATISFIABLE'
+
+def test_kissat_stock_binary_exists():
+    assert os.path.exists(KISSAT_STOCK_EXE), f'Kissat Stock binary {KISSAT_STOCK_EXE} must exist'
+    p = subprocess.run([KISSAT_STOCK_EXE, '--version'], capture_output=True, text=True, timeout=5)
+    assert p.returncode == 0, 'Kissat stock must return exit code 0 on --version'
+    assert '4.0.1' in p.stdout, 'Kissat version must be 4.0.1'
+
+def test_cadical_stock_binary_exists():
+    assert os.path.exists(CADICAL_STOCK_EXE), f'CaDiCaL Stock binary {CADICAL_STOCK_EXE} must exist'
+    p = subprocess.run([CADICAL_STOCK_EXE, '--version'], capture_output=True, text=True, timeout=5)
+    assert p.returncode == 0, 'CaDiCaL stock must return exit code 0 on --version'
+    assert '2.1.3' in p.stdout, 'CaDiCaL version must be 2.1.3'
 
 def test_weights_file_exists():
     w = BASE_DIR / 'models/weights/structural_mlp_weights.bin'
@@ -46,3 +63,21 @@ def test_audit_artifacts_present():
     pdf = BASE_DIR / 'docs/papers_published/DAC203_DEFINITIVE_ML4SAT_OFFICIAL_AUDIT.pdf'
     assert pdf.exists(), 'Official Master PDF audit report must exist'
     assert pdf.stat().st_size > 10000, 'Master PDF must be non-empty'
+
+def test_external_repositories_present():
+    for repo in ['rlaf', 'imitsat', 'neuroback']:
+        rdir = EXT_REPOS_DIR / repo
+        assert rdir.exists(), f'External repo {repo} must exist at {rdir}'
+        assert len(list(rdir.glob('*'))) > 0, f'External repo {repo} must not be empty'
+
+def test_industrial_manifest_and_script_dry_run():
+    manifest = BASE_DIR / 'data/industrial_400/UNSEEN_400_MANIFEST.csv'
+    assert manifest.exists(), 'Industrial 400 manifest must exist'
+    assert manifest.stat().st_size > 50000, 'Manifest must contain 400 indexed instances'
+
+    script = BASE_DIR / 'scripts/run_industrial_400_tournament.py'
+    assert script.exists(), 'Tournament runner script must exist'
+
+    p = subprocess.run([sys.executable, str(script), '--dry-run'], capture_output=True, text=True, timeout=10)
+    assert p.returncode == 0, f'Tournament script dry-run failed: {p.stderr}'
+    assert '[DRY RUN COMPLETE]' in p.stdout, 'Tournament dry-run must finish successfully'

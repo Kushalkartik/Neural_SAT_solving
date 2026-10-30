@@ -1,0 +1,5 @@
+#define VERSION "4.0.1"
+#define COMPILER "gcc.exe (x86_64-posix-seh-rev0, Built by MinGW-Builds project) 15.2.0 -W -Wall -O3 -DNDEBUG"
+#define ID "43f02cf3e992cb44653b35e5cb26f93281552ae0"
+#define BUILD "Mon, Sep 28, 2026 12:52:37 PM MINGW64_NT-10.0-26200 LAPTOP-UO96MBH9 3.6.5-22c95533.x86_64 x86_64"
+#define DIR "/c/Users/Kushal Agarwal/Desktop/DAC-203-P14-M3.5-LATENCY-LAB/19_ORACLE_TO_STUDENT_SOTA_DECISION_LAB/35_SOTA_INTEGRATION/kissat_stock/build"
