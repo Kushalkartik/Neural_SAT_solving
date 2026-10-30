@@ -103,3 +103,5 @@ This archive is partitioned into 6 exhaustive technical dossiers:
    *The complete Kissat neural integration campaign (Folders 20–52), the 24-run cloud VM fleet on the Boundary 27 suite, the BCP-vs-Lemma seesaw, and the 400-instance Grand Tournament.*
 6. [`06_FORMAL_MATHEMATICAL_THEOREMS_OF_FAILURE.md`](06_FORMAL_MATHEMATICAL_THEOREMS_OF_FAILURE.md)  
    *Rigorous mathematical statements and proofs of the 8 fundamental failure theorems governing neural and heuristic intervention in CDCL.*
+7. [`07_CODE_LEVEL_AUTOPSIES_AND_PATCHES.md`](07_CODE_LEVEL_AUTOPSIES_AND_PATCHES.md)  
+   *Line-by-line C/C++ source code autopsies, patch diffs, and exact telemetry: Causal Implication Flow in `deduce.c`, Inlined Clause Attention in `patch_deduce.py`, The Conservation Simplex in `bump.c`, Gate Extraction in `structural_gate_cuber.cpp`, XOR Gaussian Reduction, Neural CEGAR loops, and Tiered LBD cache thrashing.*
